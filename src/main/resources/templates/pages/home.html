@@ -1,3 +1,28 @@
-<th:block th:fragment="content">
+<th:block th:fragment="content(tasks)">
     <p th:text="'Hello, from home!'" />
+    <div>Add task</div>
+    <form method="post" action="create">
+        <input type="text" name="text" placeholder="typo new task" />
+        <input type="text" name="tag" placeholder="add tag" />
+        <button type="submit">Create</button>
+    </form>
+
+    <div>Find task</div>
+    <form method="post" action="find">
+        <input type="text" name="filter" placeholder="find by tag" />
+        <button type="submit">Find</button>
+    </form>
+
+    <div>Tasks List</div>
+    <div>
+        <div th:each="task : ${tasks}">
+            <form method="post" action="delete">
+                <b th:text="${task.id}">13/01/2011</b>
+                <span th:text="${task.text}">13/01/2011</span>
+                <i th:text="${task.tag}">13/01/2011</i>
+                <input type="number" name="id" th:value="${task.id}" hidden/>
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
 </th:block>
