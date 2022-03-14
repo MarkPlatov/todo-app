@@ -2,7 +2,6 @@ package com.example.todoApp;
 
 import com.example.todoApp.domain.Task;
 import com.example.todoApp.repos.TaskRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +12,12 @@ import java.util.Map;
 
 @Controller
 public class HomeController {
-    @Autowired
-    private TaskRepo taskRepo;
+
+    private final TaskRepo taskRepo;
+
+    public HomeController(TaskRepo taskRepo) {
+        this.taskRepo = taskRepo;
+    }
 
     @GetMapping("/")
     public ModelAndView home(Map<String, Object> model) {
@@ -53,9 +56,7 @@ public class HomeController {
 
 
     @PostMapping("delete")
-    public ModelAndView delete(
-            @RequestParam Integer id
-    ) {
+    public ModelAndView delete(@RequestParam Integer id) {
         Task task = taskRepo.findById(id);
         if (task != null) {
             taskRepo.delete(task);
@@ -67,8 +68,7 @@ public class HomeController {
     public ModelAndView edit(
             @RequestParam Integer id,
             @RequestParam String text,
-            @RequestParam String tag
-    ) {
+            @RequestParam String tag) {
         Task task = taskRepo.findById(id);
         if (task != null) {
             task.setText(text);
@@ -82,7 +82,9 @@ public class HomeController {
 
 
 
-    private ModelAndView getHomeModelAndView(Map<String, Object> model, Iterable<Task> tasks) {
+    private ModelAndView getHomeModelAndView(
+            Map<String, Object> model,
+            Iterable<Task> tasks) {
         model.put("tasks", tasks);
         model.put("route", "home");
         return new ModelAndView("layouts/home", model);
