@@ -1,12 +1,12 @@
-<th:block th:fragment="default(route, data)">
+<th:block th:fragment="default">
     <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <th:block th:insert="fragments/head.html :: meta"></th:block>
-        <th:block th:insert="fragments/head.html :: title(${route})"></th:block>
+        <th:block th:insert="fragments/head.html :: title"></th:block>
     </head>
     <body>
         <th:block th:switch="${route}">
-            <th:block th:case="home" th:insert="pages/home.html :: content(${data})"></th:block>
+            <th:block th:case="home" th:insert="pages/home.html :: content"></th:block>
             <th:block th:case="greeting" th:insert="pages/greeting.html :: content"></th:block>
             <div th:case="*">Ups...</div>
         </th:block>
