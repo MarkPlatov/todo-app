@@ -42,6 +42,9 @@ public class HomeController {
             @RequestParam String text,
             @RequestParam String tag
     ) {
+        if (text == null || text.isEmpty()) {
+            return redirectToRoot();
+        }
         Task task = new Task(text, tag);
         taskRepo.save(task);
 
