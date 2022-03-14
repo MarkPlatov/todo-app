@@ -54,12 +54,26 @@ public class HomeController {
 
     @PostMapping("delete")
     public ModelAndView delete(
-            @RequestParam Integer id,
-            Map<String, Object> model
+            @RequestParam Integer id
     ) {
         Task task = taskRepo.findById(id);
         if (task != null) {
             taskRepo.delete(task);
+        }
+        return redirectToRoot();
+    }
+
+    @PostMapping("edit")
+    public ModelAndView edit(
+            @RequestParam Integer id,
+            @RequestParam String text,
+            @RequestParam String tag
+    ) {
+        Task task = taskRepo.findById(id);
+        if (task != null) {
+            task.setText(text);
+            task.setTag(tag);
+            taskRepo.save(task);
         }
         return redirectToRoot();
     }

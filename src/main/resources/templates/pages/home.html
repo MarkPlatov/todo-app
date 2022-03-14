@@ -16,13 +16,18 @@
     <div>Tasks List</div>
     <div>
         <div th:each="task : ${tasks}">
+            <form method="post" action="edit">
+                <b th:text="${task.id}">№</b>
+                <input type="text" name="text" th:value="${task.text}"/>
+                <input type="text" name="tag" th:value="${task.tag}"/>
+                <input type="number" name="id" th:value="${task.id}" hidden/>
+                <button type="submit">Edit</button>
+            </form>
             <form method="post" action="delete">
-                <b th:text="${task.id}">13/01/2011</b>
-                <span th:text="${task.text}">13/01/2011</span>
-                <i th:text="${task.tag}">13/01/2011</i>
                 <input type="number" name="id" th:value="${task.id}" hidden/>
                 <button type="submit">Delete</button>
             </form>
+
         </div>
     </div>
 </th:block>
