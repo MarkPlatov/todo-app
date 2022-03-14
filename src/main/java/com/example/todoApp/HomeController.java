@@ -4,8 +4,6 @@ import com.example.todoApp.domain.Task;
 import com.example.todoApp.repos.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,36 +17,37 @@ public class HomeController {
     private TaskRepo taskRepo;
 
     @GetMapping("/")
-//    public ModelAndView home(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
     public ModelAndView home(Map<String, Object> model) {
         return getHomeModelAndView(model, taskRepo.findAll());
     }
 
+
+    @GetMapping("find")
+    public ModelAndView findByTag(
+            @RequestParam String tag,
+            Map<String, Object> model
+    ) {
+        if (tag == null || tag.isEmpty()) {
+            return redirectToRoot();
+        }
+        Iterable<Task> tasks;
+        tasks = taskRepo.findByTag(tag);
+
+        return getHomeModelAndView(model, tasks);
+    }
+
+
     @PostMapping("create")
     public ModelAndView create(
             @RequestParam String text,
-            @RequestParam String tag,
-            Map<String, Object> model
+            @RequestParam String tag
     ) {
         Task task = new Task(text, tag);
         taskRepo.save(task);
 
-        return getHomeModelAndView(model, taskRepo.findAll());
+        return redirectToRoot();
     }
 
-    @PostMapping("find")
-    public ModelAndView find(
-            @RequestParam String filter,
-            Map<String, Object> model
-    ) {
-        Iterable<Task> tasks;
-        if (filter == null || filter.isEmpty()) {
-            tasks = taskRepo.findAll();
-        } else {
-            tasks = taskRepo.findByTag(filter);
-        }
-        return getHomeModelAndView(model, tasks);
-    }
 
     @PostMapping("delete")
     public ModelAndView delete(
@@ -56,17 +55,24 @@ public class HomeController {
             Map<String, Object> model
     ) {
         Task task = taskRepo.findById(id);
-        System.out.println("Trying to del. id = " + id);
         if (task != null) {
-            taskRepo.delete(taskRepo.findById(id));
+            taskRepo.delete(task);
         }
-        return getHomeModelAndView(model, taskRepo.findAll());
+        return redirectToRoot();
     }
+
+
+
+
 
     private ModelAndView getHomeModelAndView(Map<String, Object> model, Iterable<Task> tasks) {
         model.put("tasks", tasks);
         model.put("route", "home");
         return new ModelAndView("layouts/home", model);
+    }
+
+    private ModelAndView redirectToRoot() {
+        return new ModelAndView("redirect:/");
     }
 
 }
