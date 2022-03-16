@@ -17,7 +17,6 @@
     <div>
         <div th:each="task : ${tasks}">
             <form method="post" action="edit">
-                <b th:text="${task.id}">№</b>
                 <input type="text" name="text" th:value="${task.text}"/>
                 <input type="text" name="tag" th:value="${task.tag}"/>
                 <input type="number" name="id" th:value="${task.id}" hidden/>
