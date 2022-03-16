@@ -45,12 +45,12 @@ public class HomeController {
             @RequestParam String text,
             @RequestParam String tag
     ) {
-        if (text == null || text.isEmpty()) {
+        if (!isStringReallyExist(text)) {
             return redirectToRoot();
         }
+        tag = formatStringToTag(tag);
         Task task = new Task(text, tag);
         taskRepo.save(task);
-
         return redirectToRoot();
     }
 
@@ -71,8 +71,9 @@ public class HomeController {
             @RequestParam String tag) {
         Task task = taskRepo.findById(id);
         if (task != null) {
-            task.setText(text);
+            tag = formatStringToTag(tag);
             task.setTag(tag);
+            task.setText(text);
             taskRepo.save(task);
         }
         return redirectToRoot();
@@ -94,4 +95,27 @@ public class HomeController {
         return new ModelAndView("redirect:/");
     }
 
+    private boolean isStringReallyExist(String text){
+        return text != null && !text.isEmpty();
+    }
+
+    private String formatStringToTag(String text){
+        text = removeSpaces(text);
+        text = addHashtagSign(text);
+        return text;
+    }
+
+    private String removeSpaces(String tag){
+        if (isStringReallyExist(tag)) {
+            tag = tag.replace(" ", "");
+        }
+        return tag;
+    }
+
+    private String addHashtagSign(String tag){
+        if (isStringReallyExist(tag) && tag.charAt(0) != '#'){
+            tag = tag.replaceFirst(tag.charAt(0) + "", "#" + tag.charAt(0));
+        }
+        return tag;
+    }
 }
