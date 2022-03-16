@@ -2,7 +2,8 @@ package com.example.todoApp.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import static com.example.todoApp.helpers.StringHelper.*;
 
 @Entity
 public class Task {
@@ -25,8 +26,8 @@ public class Task {
 
     public Task(String text, String tag) {
         this.text = text;
-        this.tag = tag;
-        setTimeMark(LocalDateTime.now());
+        this.tag = formatStringToTag(tag);
+        setDateTime(LocalDateTime.now());
     }
 
     public void setId(Integer id) {
@@ -50,7 +51,7 @@ public class Task {
     }
 
     public void setTag(String tag) {
-        this.tag = tag;
+        this.tag = formatStringToTag(tag);
     }
 
     public LocalDateTime getCreationDateTime() {
@@ -79,17 +80,29 @@ public class Task {
 
 
 
-    private void setTimeMark(LocalDateTime localDateTime){
+    private void setDateTime(LocalDateTime localDateTime){
         creationDateTime = localDateTime;
-        String day = localDateTime.getDayOfMonth() < 10 ? "0" + localDateTime.getDayOfMonth() : localDateTime.getDayOfMonth() + "";
-        String mon = localDateTime.getMonthValue() < 10 ? "0" + localDateTime.getMonthValue() : localDateTime.getMonthValue() + "";
+        creationDateString = getDate(localDateTime);
+        creationTimeString = getTime(localDateTime);
+    }
 
-        creationDateString =
-                day + "." +
-                mon + "." +
-                localDateTime.getYear();
-        creationTimeString =
-                localDateTime.getHour() + ":" +
-                localDateTime.getMinute();
+    private String formatStringToTag(String text){
+        text = removeSpaces(text);
+        text = addHashtagSign(text);
+        return text;
+    }
+
+    private String removeSpaces(String tag){
+        if (isStringReallyExist(tag)) {
+            tag = tag.replace(" ", "");
+        }
+        return tag;
+    }
+
+    private String addHashtagSign(String tag){
+        if (isStringReallyExist(tag) && tag.charAt(0) != '#'){
+            tag = tag.replaceFirst(tag.charAt(0) + "", "#" + tag.charAt(0));
+        }
+        return tag;
     }
 }
