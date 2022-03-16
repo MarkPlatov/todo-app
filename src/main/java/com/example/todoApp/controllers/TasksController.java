@@ -1,4 +1,4 @@
-package com.example.todoApp;
+package com.example.todoApp.controllers;
 
 import com.example.todoApp.domain.Task;
 import com.example.todoApp.repos.TaskRepo;
@@ -11,11 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
-public class HomeController {
+public class TasksController {
 
     private final TaskRepo taskRepo;
 
-    public HomeController(TaskRepo taskRepo) {
+    public TasksController(TaskRepo taskRepo) {
         this.taskRepo = taskRepo;
     }
 
@@ -87,8 +87,8 @@ public class HomeController {
             Map<String, Object> model,
             Iterable<Task> tasks) {
         model.put("tasks", tasks);
-        model.put("route", "home");
-        return new ModelAndView("layouts/home", model);
+        model.put("route", "tasks");
+        return new ModelAndView("layouts/app", model);
     }
 
     private ModelAndView redirectToRoot() {

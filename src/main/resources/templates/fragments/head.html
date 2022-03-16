@@ -5,7 +5,7 @@
 
 <th:block th:fragment="title">
     <title th:switch="${route}">
-        <th:block th:case="home">Home Page</th:block>
+        <th:block th:case="tasks">All Tasks</th:block>
         <th:block th:case="greeting">Hello!</th:block>
         <th:block th:case="*">Ups...</th:block>
     </title>
