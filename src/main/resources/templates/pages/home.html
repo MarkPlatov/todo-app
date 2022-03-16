@@ -4,7 +4,7 @@
     <a href="/">About project</a>
     <div>Add task</div>
     <form method="post" action="create">
-        <input type="text" name="text" placeholder="typo new task" />
+        <input type="text" name="text" placeholder="typo new task" autocomplete="off"/>
         <input type="text" name="tag" placeholder="add tag" />
         <button type="submit">Create</button>
     </form>
@@ -19,6 +19,7 @@
     <div>
         <div th:each="task : ${tasks}">
             <form method="post" action="edit">
+                <b th:text = "${task.creationDateString} + ' ' + ${task.creationTimeString}" />
                 <input type="text" name="text" th:value="${task.text}"/>
                 <input type="text" name="tag" th:value="${task.tag}"/>
                 <input type="number" name="id" th:value="${task.id}" hidden/>
