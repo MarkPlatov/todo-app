@@ -1,0 +1,27 @@
+.about {
+  .list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    margin-bottom: 16px;
+    row-gap: 6px;
+
+    div {
+      padding-left: 32px;
+      font-size: 18px;
+    }
+  }
+
+  h2 {
+    margin-top: 48px;
+  }
+
+  .monospase {
+    background-color: $bg3;
+    font-family: monospace;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}
