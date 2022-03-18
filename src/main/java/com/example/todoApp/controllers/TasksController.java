@@ -14,18 +14,18 @@ import static com.example.todoApp.helpers.StringHelper.isStringReallyExist;
 
 @Controller
 public class TasksController extends BaseController {
+    private static final String ROUTE = "tasks";
+    private static final String DATA_NAME = "tasks";
 
     private final TaskRepo taskRepo;
 
     public TasksController(TaskRepo taskRepo) {
         this.taskRepo = taskRepo;
-        route = "tasks";
-        dataName = "tasks";
     }
 
     @GetMapping("/tasks")
-    public ModelAndView home(Map<String, Object> model) {
-        return getDefaultModelAndView(model, taskRepo.findAll());
+    public ModelAndView tasks(Map<String, Object> model) {
+        return getDefaultModelAndView(model, taskRepo.findAll(), DATA_NAME, ROUTE);
     }
 
 
@@ -40,7 +40,7 @@ public class TasksController extends BaseController {
         Iterable<Task> tasks;
         tasks = taskRepo.findByTag(tag);
 
-        return getDefaultModelAndView(model, tasks);
+        return getDefaultModelAndView(model, tasks, DATA_NAME, ROUTE);
     }
 
 
@@ -83,9 +83,7 @@ public class TasksController extends BaseController {
 
 
 
-
-
     private ModelAndView redirectToRoot() {
-        return new ModelAndView("redirect:/" + route);
+        return new ModelAndView("redirect:/" + ROUTE);
     }
 }
