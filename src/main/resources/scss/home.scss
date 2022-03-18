@@ -1,0 +1,20 @@
+.home {
+  display: grid;
+  grid-template-rows: 40vh 50vh 10vh;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  align-content: start;
+
+
+  .big-button {
+    width: 400px;
+    height: 80px;
+    border-radius: 40px;
+    font-size: 32px;
+    margin-bottom: 20vh;
+  }
+
+  .about-href {
+  }
+}
