@@ -101,7 +101,7 @@ public class Task {
 
     private String addHashtagSign(String tag){
         if (isStringReallyExist(tag) && tag.charAt(0) != '#'){
-            tag = tag.replaceFirst(tag.charAt(0) + "", "#" + tag.charAt(0));
+            tag = "#" + tag;
         }
         return tag;
     }
