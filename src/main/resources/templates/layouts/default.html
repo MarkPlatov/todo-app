@@ -5,9 +5,11 @@
         <th:block th:insert="fragments/head.html :: title"></th:block>
     </head>
     <body>
+        <th:block th:insert="fragments/common.html :: navigation"></th:block>
         <th:block th:switch="${route}">
             <th:block th:case="tasks" th:insert="pages/tasks.html :: content"></th:block>
             <th:block th:case="about" th:insert="pages/about.html :: content"></th:block>
+            <th:block th:case="home" th:insert="pages/home.html :: content"></th:block>
             <div th:case="*">Ups...</div>
         </th:block>
     </body>

@@ -1,0 +1,7 @@
+<th:block th:fragment="navigation">
+    <nav>
+        <a th:class="${route == '/tasks'}? 'active' : ''" href="/tasks">All tasks</a>
+        <a th:class="${route == '/about'}? 'active' : ''" href="/about">About project</a>
+        <a th:class="${route == '/'}? 'active' : ''" href="/">Home</a>
+    </nav>
+</th:block>

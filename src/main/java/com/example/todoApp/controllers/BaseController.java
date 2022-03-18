@@ -13,6 +13,11 @@ public class BaseController {
             Map<String, Object> model,
             Iterable<T> data) {
         model.put(dataName, data);
+        return getDefaultModelAndView(model);
+    }
+
+    ModelAndView getDefaultModelAndView(
+            Map<String, Object> model) {
         model.put("route", route);
         return new ModelAndView(VIEW_NAME, model);
     }
