@@ -1,12 +1,23 @@
 a {
   text-decoration: none;
-  color: #878787;
+  color: $text1;
   border-bottom: 1px dotted #3a3a3a;
 }
 
 body {
+  color: $text1;
+  background-color: $bg1;
+  font-size: 16px;
+  font-family: Arial, serif;
   margin: 0;
-  color: #e5e5e5;
-  background-color: #121212;
+}
 
+form {
+  margin: 0;
+}
+
+input {
+  &:focus-visible{
+    outline: none;
+  }
 }

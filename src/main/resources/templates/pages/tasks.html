@@ -1,34 +1,39 @@
 <th:block th:fragment="content">
-    <p>Welcome to simple TODO list</p>
+    <div class="tasks container">
+        <h1>TODO List</h1>
 
-    <div>Add task</div>
-    <form method="post" action="create">
-        <input type="text" name="text" placeholder="typo new task" autocomplete="off"/>
-        <input type="text" name="tag" placeholder="add tag" />
-        <button type="submit">Create</button>
-    </form>
+        <div class="create-find">
+            <div class="add-task">
+                <form class="form-horizontal" method="post" action="create">
+                    <input class="input-text task-text" type="text" name="text" placeholder="add new task" autocomplete="off"/>
+                    <input class="input-text task-tag" type="text" name="tag" placeholder="add tag" />
+                    <button class="button" type="submit">Create</button>
+                </form>
+            </div>
+            <div class="find-task">
+                <form class="form-horizontal" method="get" action="find">
+                    <input class="input-text" type="text" name="tag" placeholder="find tasks by tag" />
+                    <button class="button" type="submit">Find</button>
+                </form>
+            </div>
+        </div>
 
-    <div>Find task</div>
-    <form method="get" action="find">
-        <input type="text" name="tag" placeholder="find by tag" />
-        <button type="submit">Find</button>
-    </form>
+        <h2>Tasks List</h2>
+        <div class="tasks-list">
+            <div class="task" th:each="task : ${tasks}">
+                <form class="form-horizontal" method="post" action="edit">
+                    <div class="time" th:text = "${task.creationDateString} + ' ' + ${task.creationTimeString}" />
+                    <input class="input-text task-text" type="text" name="text" th:value="${task.text}"/>
+                    <input class="input-text task-tag" type="text" name="tag" th:value="${task.tag}"/>
+                    <input type="number" name="id" th:value="${task.id}" hidden/>
+                    <button class="button" type="submit">Edit</button>
+                </form>
+                <form method="post" action="delete">
+                    <input type="number" name="id" th:value="${task.id}" hidden/>
+                    <button class="button button-red" type="submit">Delete</button>
+                </form>
 
-    <div>Tasks List</div>
-    <div>
-        <div th:each="task : ${tasks}">
-            <form method="post" action="edit">
-                <b th:text = "${task.creationDateString} + ' ' + ${task.creationTimeString}" />
-                <input type="text" name="text" th:value="${task.text}"/>
-                <input type="text" name="tag" th:value="${task.tag}"/>
-                <input type="number" name="id" th:value="${task.id}" hidden/>
-                <button type="submit">Edit</button>
-            </form>
-            <form method="post" action="delete">
-                <input type="number" name="id" th:value="${task.id}" hidden/>
-                <button type="submit">Delete</button>
-            </form>
-
+            </div>
         </div>
     </div>
 </th:block>

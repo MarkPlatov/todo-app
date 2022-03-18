@@ -1,0 +1,45 @@
+.tasks {
+  h1 {
+
+  }
+
+  .create-find {
+    display: flex;
+    column-gap: 32px;
+
+    .add-task {
+      .task-text {
+        width: 592px;
+      }
+    }
+
+    .find-task {
+      .input-text {
+        width: 312px;
+      }
+    }
+  }
+  h2 {
+    margin-top: 48px;
+  }
+
+  .tasks-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+
+    .task {
+      display: flex;
+      column-gap: 16px;
+      align-items: center;
+
+      .time {
+        color: $text2;
+      }
+
+      .task-text {
+        width: 800px;
+      }
+    }
+  }
+}
