@@ -1,3 +1,40 @@
 <th:block th:fragment="content">
     <h1>About this project</h1>
+    <div>
+        <h2>Application</h2>
+        <div>This application can help you to manage your tasks. Here you can:</div>
+        <div class="list">
+            <div>Create new task</div>
+            <div>Add tag to your task</div>
+            <div>Search your tasks by tag</div>
+            <div>Edit your tasks</div>
+            <div>Edit tags in tasks</div>
+            <div>Delete completed tasks</div>
+        </div>
+        <div>
+            Also tags in tasks are autoformated. So if you type tag like
+            <span class="monospase">my new tag</span>
+            then formatted tag will be
+            <span class="monospase">#my-new-tag</span>
+            .
+        </div>
+    </div>
+
+    <div>
+        <h2>About me</h2>
+        <div>I developed this simple web app to learn following techs:</div>
+        <div class="list">
+            <div>Spring</div>
+            <div>PostgreSQL</div>
+            <div>Maven</div>
+            <div>Thymeleaf</div>
+        </div>
+        <div>
+            You can find this project on my
+            <a href="https://github.com/MarkPlatov/todo-app">GitHub</a>
+        </div>
+    </div>
+
+
+
 </th:block>
