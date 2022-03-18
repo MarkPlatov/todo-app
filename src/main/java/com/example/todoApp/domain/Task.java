@@ -94,7 +94,8 @@ public class Task {
 
     private String removeSpaces(String tag){
         if (isStringReallyExist(tag)) {
-            tag = tag.replace(" ", "");
+            tag = tag.trim();
+            tag = tag.replace(" ", "-");
         }
         return tag;
     }
