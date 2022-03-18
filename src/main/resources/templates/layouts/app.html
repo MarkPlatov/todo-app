@@ -1,3 +1,4 @@
 <th:block th:switch="${route}">
+    <th:block th:case="home" th:insert="layouts/home.html :: home-layout"></th:block>
     <th:block th:case="*" th:insert="layouts/default.html :: default"></th:block>
 </th:block>
